@@ -70,11 +70,9 @@ export default function Navbar() {
 
                             <button
                                 onClick={() => console.log('Wallet connect clicked')}
-                                className="px-6 py-2 bg-gradient-to-r from-[#00ff88] to-[#00d4ff] text-black rounded-lg hover:shadow-lg hover:shadow-[#00ff88]/50 transition-all text-base "
-                            >
-                                <span className="  font-semibold">
-                                    Connect Wallet
-                                </span>
+                                className="px-6 py-2 bg-gradient-to-r font-semibold from-[#00ff88] to-[#00d4ff] text-black rounded-lg hover:shadow-lg hover:shadow-[#00ff88]/50 transition-all text-base "
+                            > 
+                                    Connect Wallet 
                             </button>
                         </div>
 
