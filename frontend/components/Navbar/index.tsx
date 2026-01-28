@@ -2,8 +2,10 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Github, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import BlockchainSwitcher from '@/components/BlockchainSwitcher';
+import MoreDropdown from "./MoreDropdown"
 
 const navItems = [
     // { href: '/', label: 'Home' },
@@ -40,11 +42,13 @@ export default function Navbar() {
                 <div className="max-w-7xl mx-auto px-6 py-4">
                     <div className="flex items-center justify-between">
                         <Link href="/" className="flex items-center space-x-3">
+                            <BlockchainSwitcher />
                             <div className="px-6 py-3 rounded-lg">
                                 <span className="font-mono font-bold text-xl bg-gradient-to-r from-[#00ff88] to-[#00d4ff] bg-clip-text text-transparent tracking-wider">
                                     KiloDEX
                                 </span>
                             </div>
+                            
                         </Link>
 
                         {/* Desktop Navigation */}
@@ -62,14 +66,7 @@ export default function Navbar() {
                                 </Link>
                             ))}
 
-                            <a
-                                href="https://github.com/pisuthd/kilodex"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center gap-2 text-sm font-medium text-gray-300 hover:text-white transition-colors"
-                            >
-                                GitHub
-                            </a>
+                            <MoreDropdown />
 
                             <button
                                 onClick={() => console.log('Wallet connect clicked')}
@@ -115,7 +112,7 @@ export default function Navbar() {
                                     href="/"
                                     className="flex items-center space-x-3"
                                     onClick={() => setIsMenuOpen(false)}
-                                >
+                                > 
                                     <span className="font-mono font-bold text-xl bg-gradient-to-r from-[#00ff88] to-[#00d4ff] bg-clip-text text-transparent tracking-wider">KiloDEX</span>
                                 </Link>
                                 <button
@@ -143,15 +140,9 @@ export default function Navbar() {
                                     </Link>
                                 ))}
 
-                                <a
-                                    href="https://github.com/pisuthd/kilodex"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="block px-4 py-3 rounded-lg text-sm font-medium text-gray-300 hover:bg-gray-800 hover:text-white transition-colors"
-                                    onClick={() => setIsMenuOpen(false)}
-                                >
-                                    GitHub
-                                </a>
+                                <div className="block px-4 py-2">
+                                    <MoreDropdown />
+                                </div>
 
                                 <button
                                     onClick={() => {

@@ -17,9 +17,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "TradeArena — TBD",
+  title: "KiloDEX | Privacy-First AMM for Institutional Liquidity",
   description:
-    "TBD",
+    "KiloDEX is a privacy-first AMM DEX built for institutional liquidity providers, enabling selective access, policy-controlled trading, and verifiable compliance across privacy-native blockchains",
 };
 
 export default function RootLayout({
