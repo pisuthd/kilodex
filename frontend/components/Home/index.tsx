@@ -2,13 +2,14 @@
  
 import Hero from "./Hero"
 import CriticalQuestion from "./CriticalQuestion"
+import HowItWorks from "../HowItWorks"
 
 const HomeContainer = () => {
     return (
         <div className="min-h-screen bg-[#0a0a0f] text-white"> 
              <Hero />
-            <CriticalQuestion />{/*
-            <HowItWorks />
+            <CriticalQuestion />
+            <HowItWorks />{/*
             <ComparisonTable />  
             <WhatKiloRailsEnables /> 
             <FinalQA /> */}
