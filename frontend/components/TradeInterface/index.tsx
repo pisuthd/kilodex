@@ -92,14 +92,32 @@ const TradeInterface = () => {
     }
   }, [publicKey]);
 
-  // Calculate to amount (simple 1:1 for demo, would use pool data in production)
+  // Exchange rate: 100 USDC = 11.2 WALEO
+  // This means: 1 USDC = 0.112 WALEO, 1 WALEO = 8.928571 USDC
+  const EXCHANGE_RATES = {
+    'WALEO_USDC': 8.928571, // 1 WALEO = 8.928571 USDC
+    'USDC_WALEO': 0.112      // 1 USDC = 0.112 WALEO
+  };
+
+  // Calculate to amount based on exchange rate
   useEffect(() => {
     if (fromAmount && parseFloat(fromAmount) > 0) {
-      setToAmount(fromAmount); // Simple 1:1 for demo
+      const fromAmountNum = parseFloat(fromAmount);
+      let toAmountNum = 0;
+
+      if (fromToken.symbol === 'WALEO' && toToken.symbol === 'USDC') {
+        toAmountNum = fromAmountNum * EXCHANGE_RATES.WALEO_USDC;
+      } else if (fromToken.symbol === 'USDC' && toToken.symbol === 'WALEO') {
+        toAmountNum = fromAmountNum * EXCHANGE_RATES.USDC_WALEO;
+      } else {
+        toAmountNum = fromAmountNum; // Fallback to 1:1
+      }
+
+      setToAmount(toAmountNum.toFixed(6));
     } else {
       setToAmount('');
     }
-  }, [fromAmount]);
+  }, [fromAmount, fromToken, toToken]);
 
   // Handle token swap
   const handleSwap = async () => {
@@ -194,11 +212,13 @@ const TradeInterface = () => {
 
   // Switch tokens
   const switchTokens = () => {
-    const temp = fromToken;
+    const tempToken = fromToken;
+    const tempAmount = fromAmount;
+    
     setFromToken(toToken);
-    setToToken(temp);
+    setToToken(tempToken);
     setFromAmount(toAmount);
-    setToAmount(fromAmount);
+    // The toAmount will be recalculated automatically by the useEffect
   };
 
   return (
@@ -245,7 +265,7 @@ const TradeInterface = () => {
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                     <span className="text-xs text-green-400 font-medium">
-                      Aleo Testnet
+                      Live
                     </span>
                   </div>
                 </div>
@@ -330,10 +350,22 @@ const TradeInterface = () => {
                       </>
                     )}
                   </motion.button>
+ 
+                    <div className="mt-4 text-center">
+                      <p className="text-xs text-gray-400">
+                        1 {fromToken.symbol} = {
+                          fromToken.symbol === 'WALEO' && toToken.symbol === 'USDC' 
+                            ? EXCHANGE_RATES.WALEO_USDC.toFixed(6)
+                            : fromToken.symbol === 'USDC' && toToken.symbol === 'WALEO'
+                            ? EXCHANGE_RATES.USDC_WALEO.toFixed(6)
+                            : '1.000000'
+                        } {toToken.symbol}
+                      </p> 
+                    </div> 
 
                   {/* Transaction Status */}
                   {txStatus && (
-                    <div className="bg-black/30 border border-white/5 rounded-lg p-3">
+                    <div className="bg-black/30 border border-white/5 rounded-lg p-3 mt-4">
                       <p className="text-sm text-gray-300">{txStatus}</p>
                     </div>
                   )}
