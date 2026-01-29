@@ -73,6 +73,7 @@ program kilodex_v1.aleo {
     async function finalize_transfer_public(public from_balance_key: field, public to_balance_key: field, public token_id: u64, public to: address, public amount: u128) {
         
         let from_balance: u128 = Mapping::get_or_use(balances, from_balance_key, 0u128);
+        assert(from_balance >= amount); // Prevent underflow
         Mapping::set(balances, from_balance_key, from_balance - amount);
         
         let to_balance: u128 = Mapping::get_or_use(balances, to_balance_key, 0u128);
@@ -190,6 +191,7 @@ program kilodex_v1.aleo {
         let amount_out: u128 = amount_in_with_fee * reserve_out / (reserve_in + amount_in_with_fee);
             
         assert(amount_out >= amount_out_min);
+        assert(amount_out < reserve_out); // Ensure we don't drain the pool
             
         // Update pool reserves
         let updated_pool: PoolInfo = PoolInfo {
@@ -203,8 +205,9 @@ program kilodex_v1.aleo {
         
         Mapping::set(pools, pool_key, updated_pool);
             
-        // Transfer tokens from swapper to pool 
+        // Check user has enough tokens before transfer
         let token_in_balance: u128 = Mapping::get(balances, token_in_balance_key);
+        assert(token_in_balance >= amount_in); // Prevent underflow
         Mapping::set(balances, token_in_balance_key, token_in_balance - amount_in);
             
         // Transfer output tokens from pool to swapper 
