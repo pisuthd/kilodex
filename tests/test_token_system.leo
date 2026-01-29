@@ -2,16 +2,10 @@ import kilodex_v1.aleo;
 
 program test_token_system.aleo { 
 
-    // we need at least one transition function
+    // we need at least one transition function 
     @test
-    transition test_pre_test() {
-
-        let waleo_token_id: u64 = 1u64;
-        let usdc_token_id: u64 = 2u64;
-          
-        // Verify all keys are different
-        assert_eq(waleo_token_id, 1u64);
-        assert_eq(usdc_token_id, 2u64);  
+    transition dummy_transition() { 
+        assert(true);
     }
 
     @test
