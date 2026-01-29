@@ -1,11 +1,16 @@
 "use client"
 
 import Link from 'next/link';
+import { WalletConnectButton } from '@demox-labs/aleo-wallet-adapter-reactui';
+import { WalletDisconnectButton } from '@demox-labs/aleo-wallet-adapter-reactui';
+import { WalletModalButton } from '@demox-labs/aleo-wallet-adapter-reactui';
+import { useWallet } from "@demox-labs/aleo-wallet-adapter-react";
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import BlockchainSwitcher from '@/components/BlockchainSwitcher';
 import MoreDropdown from "./MoreDropdown"
+
 
 const navItems = [
     // { href: '/', label: 'Home' },
@@ -15,6 +20,9 @@ const navItems = [
 ];
 
 export default function Navbar() {
+
+    const { wallet, publicKey } = useWallet();
+
     const pathname = usePathname();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -48,7 +56,7 @@ export default function Navbar() {
                                     KiloDEX
                                 </span>
                             </div>
-                            
+
                         </Link>
 
                         {/* Desktop Navigation */}
@@ -67,13 +75,15 @@ export default function Navbar() {
                             ))}
 
                             <MoreDropdown />
+                            {!wallet ? (
+                                <WalletModalButton />
+                            ) : !publicKey ? (
+                                <WalletConnectButton />
+                            ) : (
+                                <WalletDisconnectButton />
+                            )}
 
-                            <button
-                                onClick={() => console.log('Wallet connect clicked')}
-                                className="px-6 py-2 bg-gradient-to-r font-semibold from-[#00ff88] to-[#00d4ff] text-black rounded-lg hover:shadow-lg hover:shadow-[#00ff88]/50 transition-all text-base "
-                            > 
-                                    Connect Wallet 
-                            </button>
+
                         </div>
 
                         {/* Mobile Menu Button */}
@@ -110,7 +120,7 @@ export default function Navbar() {
                                     href="/"
                                     className="flex items-center space-x-3"
                                     onClick={() => setIsMenuOpen(false)}
-                                > 
+                                >
                                     <span className="font-mono font-bold text-xl bg-gradient-to-r from-[#00ff88] to-[#00d4ff] bg-clip-text text-transparent tracking-wider">KiloDEX</span>
                                 </Link>
                                 <button
@@ -142,17 +152,14 @@ export default function Navbar() {
                                     <MoreDropdown />
                                 </div>
 
-                                <button
-                                    onClick={() => {
-                                        console.log('Wallet connect clicked');
-                                        setIsMenuOpen(false);
-                                    }}
-                                    className="w-full px-4 py-3 bg-gradient-to-r from-[#00ff88] to-[#00d4ff] text-black rounded-lg hover:shadow-lg hover:shadow-[#00ff88]/50 transition-all text-sm font-semibold text-center"
-                                >
-                                    <span className="  font-semibold">
-                                        Connect Wallet
-                                    </span>
-                                </button>
+                                {!wallet ? (
+                                    <WalletModalButton />
+                                ) : !publicKey ? (
+                                    <WalletConnectButton />
+                                ) : (
+                                    <WalletDisconnectButton />
+                                )}
+
                             </div>
                         </div>
                     </div>
