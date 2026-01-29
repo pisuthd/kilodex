@@ -209,42 +209,38 @@ leo test
 - **Zero-Knowledge Proofs**: Privacy-preserving transaction validation
 - **Private Records**: On-chain data privacy model
 
-##  Development Status
+##  Development Status 
 
-### Wave #1: Foundation ✅ Complete
-- ✅ **Frontend**: Complete Next.js application with modern UI
-- ✅ **Smart Contract**: Core DEX functionality implemented
-- ✅ **Wallet Integration**: Aleo wallet adapter fully integrated
-- ✅ **Testnet Deployment**: Deployed on Aleo Testnet Beta
-- ✅ **Demo Tokens**: WALEO and USDC available for testing
-- ✅ **Basic Trading**: Token swaps with exchange rate calculations
+### Wave 1 - Foundation (Complete)
+- Core DEX functionality with Aleo smart contracts
+- Modern Next.js frontend with wallet integration
+- Testnet deployment with demo tokens (WALEO, USDC)
+- Basic token swap functionality with price discovery
 
-### Wave #2: Policy-Controlled Liquidity
-- 🔄 **zPass Integration**: Implement zero-knowledge credential verification
-- 🔄 **Liquidity Provider Controls**: UI for LPs to set trader criteria (KYC status, jurisdiction, entity type)
-- 🔄 **Policy Enforcement**: Smart contract validation of trader eligibility
-- 🔄 **Credential Marketplace**: Interface for traders to obtain required zPass credentials
+### Wave 2 - Policy-Controlled Liquidity (In Progress)
+- Zero-knowledge credential verification via zPass
+- Liquidity provider controls for trader eligibility criteria
+- Smart contract policy enforcement mechanisms
+- Credential marketplace for trader onboarding
 
-### Wave #3: Token Registry Integration
-- ⏳ **Token Registry Program**: Implement singleton token registry for managing multiple ARC-20 tokens
-- ⏳ **Multi-Token Support**: Transition from mock internal tokens to real ARC-20 tokens
-- ⏳ **Registry Interface**: UI for browsing and selecting supported tokens
-- ⏳ **Cross-Program Calls**: Handle interactions between DEX and token registry programs
-- ⏳ **Balance Management**: Unified balance tracking across multiple token types
+### Wave 3 - Token Registry Integration
+- Singleton token registry for ARC-20 token management
+- Migration from mock tokens to real ARC-20 assets
+- Multi-token support and cross-program interactions
+- Unified balance tracking across token types
 
-### Wave #4: Advanced AMM Implementation
-- ⏳ **Liquidity Pool Management**: Full UI for creating and managing real token pools
-- ⏳ **LP Token Operations**: Mint, burn, and transfer LP tokens with registry integration
-- ⏳ **Fee Distribution**: Automatic fee collection and distribution to LPs
-- ⏳ **Price Impact Calculations**: Real-time price impact estimation
-- ⏳ **Transaction History**: Comprehensive trading history for users
+### Wave 4 - Advanced AMM Implementation
+- Complete liquidity pool management interface
+- LP token operations with registry integration
+- Automated fee distribution to liquidity providers
+- Real-time price impact calculations and trading history
 
-### Wave #5-10: Advanced Features & Production
-- ⏳ **Privacy Features**: View key management, private position tracking, confidential trading
-- ⏳ **Compliance Tools**: Regulatory reporting, audit trails, policy enforcement
-- ⏳ **Selective Disclosure**: Controlled data sharing mechanisms
-- ⏳ **Advanced AMM**: Multi-token pools, dynamic fees, cross-pool routing
-- ⏳ **Production Ready**: Mainnet deployment, complete documentation, support infrastructure
+### Wave 5-10 - Production & Advanced Features
+- Enhanced privacy features with view key management
+- Comprehensive compliance and reporting tools
+- Selective disclosure mechanisms for auditors
+- Advanced AMM features: multi-token pools, dynamic fees
+- Production deployment with complete infrastructure
 
 ## License
 
