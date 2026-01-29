@@ -1,4 +1,4 @@
-# KiloDex 
+# KiloDEX
 
 **KiloDEX is a privacy-first AMM decentralized exchange designed for institutional liquidity providers.**
 It leverages zero-knowledge proofs to protect sensitive trading data while preserving the compliance, auditability, and control required by regulated participants.
@@ -50,6 +50,8 @@ Existing DEX architectures cannot answer this without introducing centralized ga
 ### KiloDEX Overview
 
 KiloDEX is a privacy-native AMM liquidity protocol that enables institutions to provide on-chain liquidity with control, confidentiality, and verifiable compliance.
+
+<img width="783" height="378" alt="kilodex drawio" src="https://github.com/user-attachments/assets/b415e8cf-4381-4a14-b105-7a2807d9b942" />
 
 The protocol explicitly separates public market data from private institutional state, ensuring price discovery remains transparent while sensitive information stays protected.
 
