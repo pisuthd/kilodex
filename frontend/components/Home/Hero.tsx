@@ -73,10 +73,10 @@ const Hero = () => {
                             className="flex flex-col sm:flex-row gap-4"
                         >
                             <button
-                                onClick={() => router.push('/explore')}
+                                onClick={() => router.push('/trade')}
                                 className="px-8 py-4 bg-gradient-to-r from-[#00ff88] to-[#00d4ff] text-black font-bold rounded-lg hover:shadow-lg hover:shadow-[#00ff88]/50 transition-all flex items-center justify-center group"
                             >
-                                Explore
+                                Try Now
                                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                             </button>
                             <Link
@@ -87,32 +87,7 @@ const Hero = () => {
                                 Watch YouTube
                             </Link>
                         </motion.div>
-
-                        {/* Privacy Technologies Section */}
-                        {/* <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.6 }}
-                            className="pt-0 flex justify-center lg:justify-start"
-                        >
-                            <div className="text-center lg:text-left">
-                                <p className="text-xs sm:text-sm text-gray-400 mb-3">Privacy Powered By</p>
-                                <div className="flex items-center justify-center lg:justify-start gap-4">
-                                    <div className="group relative">
-                                        <Image
-                                            src="/aleo-icon.png"
-                                            alt="Aleo ZK"
-                                            width={32}
-                                            height={32}
-                                            className="w-6 h-6 sm:w-8 sm:h-8 transition-transform group-hover:scale-110"
-                                        />
-                                        <span className="absolute -top-12 sm:-top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-50 w-48 sm:w-auto text-center">
-                                            Aleo
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </motion.div> */}
+ 
                     </motion.div>
 
                     {/* Right Side - Swap Interface */}
