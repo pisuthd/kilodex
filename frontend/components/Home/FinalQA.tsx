@@ -12,35 +12,34 @@ const FinalQA = () => {
         {
             question: "What is KiloDEX?",
             answer:
-                "KiloDEX is a privacy-first AMM DEX built for institutional liquidity providers, enabling selective access, policy-controlled trading, and verifiable compliance on privacy-native blockchains. The protocol is currently live on Aleo Testnet and is designed to support additional privacy chains such as Midnight and Canton."
+                "KiloDEX is a privacy-first AMM DEX designed for institutional liquidity providers. It focuses on protecting liquidity provider positions while keeping AMM pricing transparent. KiloDEX is currently live on Aleo Testnet and is being built with support for additional privacy-focused blockchains in the future."
         },
         {
             question: "Who is KiloDEX designed for?",
             answer:
-                "KiloDEX is designed for institutional liquidity providers, market makers, treasuries, and regulated entities that require control over counterparties, privacy over positions, and provable compliance when providing on-chain liquidity."
+                "KiloDEX is designed for institutional liquidity providers, market makers, treasuries, and regulated entities that need control over who can trade against their liquidity and privacy over their on-chain positions."
         },
         {
             question: "What does 'selective access' mean?",
             answer:
-                "Selective access allows liquidity providers to define on-chain policies that determine who is permitted to trade against their liquidity. Traders must cryptographically prove eligibility without revealing their identity or sensitive data."
+                "Selective access means liquidity providers can define policies that control who is allowed to trade against their pools. In future waves, traders will prove eligibility using zero-knowledge credentials without revealing their identity."
         },
         {
             question: "How is KiloDEX different from Uniswap or other AMMs?",
             answer:
-                "Unlike traditional AMMs, KiloDEX does not expose liquidity to unrestricted, anonymous order flow. Liquidity providers retain control over access, while trades and balances remain private and compliance can be proven on-chain."
+                "Traditional AMMs expose liquidity to unrestricted and anonymous order flow. KiloDEX is built to give liquidity providers more control and privacy, while still using public pool reserves for transparent and verifiable pricing."
         },
         {
             question: "How does KiloDEX handle privacy and compliance?",
             answer:
-                "KiloDEX uses zero-knowledge proofs and privacy-native blockchain features to keep trade details confidential while allowing institutions to prove solvency, policy adherence, and compliance to authorized parties when required."
+                "KiloDEX separates public pricing data from private liquidity provider state. Pool reserves are public for price discovery, while individual LP positions are private. Future integrations like zPass will enable verifiable compliance without exposing sensitive data."
         },
         {
             question: "Which blockchains does KiloDEX support?",
             answer:
-                "KiloDEX is currently deployed on Aleo Testnet. The protocol is architected to support additional privacy-focused blockchains, including Midnight and Canton, each leveraging their unique privacy and selective disclosure capabilities."
+                "KiloDEX is currently deployed on Aleo Testnet. The protocol is designed to expand to other privacy-focused blockchains, such as Midnight and Canton, as the project progresses."
         }
     ]
-
 
 
     const toggleQuestion = (index: number) => {
@@ -76,7 +75,7 @@ const FinalQA = () => {
                         whileInView={{ opacity: 1 }}
                         transition={{ delay: 0.3 }}
                     >
-                        Everything you need to know about <span className="text-[#00ff88] font-semibold">KiloDEX</span> 
+                        Everything you need to know about <span className="text-[#00ff88] font-semibold">KiloDEX</span>
                     </motion.p>
                 </motion.div>
 
