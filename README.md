@@ -1,5 +1,13 @@
 # KiloDEX
 
+<div align="center">
+
+<img width="1289" height="706" alt="Screenshot from 2026-01-29 23-35-38" src="https://github.com/user-attachments/assets/b25637ff-7b0e-4ba6-a5de-566e8fb577d4" />
+
+[Live Demo](https://kilodex.xyz) • [YouTube Video](https://youtu.be/UvyyKhmTAt8)
+
+</div>
+
 **KiloDEX is a privacy-first AMM decentralized exchange designed for institutional liquidity providers.**
 It leverages zero-knowledge proofs to protect sensitive trading data while preserving the compliance, auditability, and control required by regulated participants.
 
@@ -9,7 +17,7 @@ KiloDEX is built from the ground up to support:
 - **Private but auditable settlement**
 - **Gradual decentralization without compromising institutional standards**
 
-The protocol is designed to support multiple privacy-preserving blockchains over time, starting with Aleo. By leveraging technologies such as **zPass**, individual liquidity providers can selectively permit traders who meet specific regulatory criteria—such as KYC/AML status, jurisdiction, or entity type—without revealing identities or sensitive data on-chain.
+The protocol is designed to support multiple privacy-preserving blockchains over time, starting with **Aleo**. By leveraging technologies such as **zPass**, individual liquidity providers can selectively permit traders who meet specific regulatory criteria—such as KYC/AML status, jurisdiction, or entity type—without revealing identities or sensitive data on-chain.
 
 ## Highlighted Features
 
@@ -43,32 +51,32 @@ Institutions do not need permissionless liquidity — they need controlled liqui
 
 The core question is:
 
-**Who is allowed to trade against my capital — and under what conditions?**
+> *Who is allowed to trade against my capital — and under what conditions?*
 
 Existing DEX architectures cannot answer this without introducing centralized gatekeepers or off-chain trust assumptions.
 
-### KiloDEX Overview
+## KiloDEX Overview
 
 KiloDEX is a privacy-native AMM liquidity protocol that enables institutions to provide on-chain liquidity with control, confidentiality, and verifiable compliance.
 
 <img width="783" height="378" alt="kilodex drawio" src="https://github.com/user-attachments/assets/b415e8cf-4381-4a14-b105-7a2807d9b942" />
 
-The protocol explicitly separates public market data from private institutional state, ensuring price discovery remains transparent while sensitive information stays protected.
+The protocol explicitly separates public market data from private institutional state. This ensures transparent price discovery and verifiable execution, while protecting sensitive liquidity and strategy information.
 
 #### Public State (Visible On-Chain)
 
-The following data is public to ensure correct AMM pricing and market transparency:
+The following data is public to enable correct pricing, verification, and open market interaction:
 
 - **Total reserve of token A** (Reserve A)
 - **Total reserve of token B** (Reserve B)
-- **AMM pricing function and fee parameters**
-- **Pool-level configuration and policy hashes**
+- **AMM pricing model** (constant-product: x · y = k) and fee parameters
+- **Pool-level configuration and policy commitments (hashes)**
 
 This public state is sufficient to:
 
-- Calculate swap prices
-- Verify AMM correctness
-- Enable transparent market interaction
+- Calculate swap prices deterministically
+- Verify AMM execution correctness
+- Ensure transparent and predictable market behavior
 
 #### Private State (Shielded by Zero-Knowledge)
 
@@ -78,8 +86,11 @@ The following data is private by default and never exposed publicly:
 - **LP token balances and ownership**
 - **Deposit and withdrawal timing**
 - **Rebalancing behavior and strategy**
+- **Trader eligibility proofs and credentials**
 
-Private state is stored using zero-knowledge–native data models and can only be accessed by authorized parties via cryptographic proofs.
+Eligibility checks and policy enforcement are performed using zero-knowledge proofs, allowing trades to execute only when requirements are met, without revealing identities or sensitive compliance data.
+
+Private state is stored using zero-knowledge–native data models and can only be accessed by authorized parties through cryptographic proofs, while settlement correctness remains provable on-chain.
 
 ## Project Structure
 
@@ -97,12 +108,27 @@ kilodex/
 ```
 
 ## Architecture
+> *Note: Currently in early development with basic functionality implemented. Additional functions for institutional controls will be added soon.*
 
-KiloDEX leverages privacy-preserving Aleo blockchain smart contracts (programs) written in Leo. The protocol uses zero-knowledge proofs to enable controlled liquidity access while maintaining transparent price discovery through public AMM reserves and private institutional positions.
+KiloDEX is built on the Aleo blockchain using privacy-preserving smart contracts (programs) written in Leo. The protocol leverages zero-knowledge proofs to separate public market data from private institutional state, allowing controlled liquidity access while maintaining transparent AMM pricing through public pool reserves.
+
+### Core Components
+
+KiloDEX consists of two main on-chain subsystems:
+
+- A **token system**, used to model assets and balances
+- A **minimal AMM DEX**, responsible for pool state, pricing, and swap execution
+
+These components are composed into a single `main.aleo` program in Wave 1.
+
+---
 
 ### Core Data Structures
 
 #### Token System
+
+The token system is a simplified, mock implementation used for testing and end-to-end validation.
+
 ```leo
 struct TokenInfo {
     token_id: u64,
@@ -117,7 +143,14 @@ record Token {
 }
 ```
 
+- `TokenInfo` defines token metadata and global supply
+- `Token` records represent user-owned balances and are stored privately by default
+- This system will be replaced by ARC-20 tokens via a registry in future waves
+
 #### AMM System
+
+The AMM system manages pool-level state required for pricing and swap execution
+
 ```leo
 struct PoolInfo {
     token_a_id: u64,
@@ -129,18 +162,21 @@ struct PoolInfo {
 }
 ```
 
+- Pool reserves are stored publicly to enable transparent price discovery
+- Pricing follows the classic constant-product formula: `x * y = k`
+- LP total supply is tracked at the pool level, while individual LP positions remain private
+- Policy rules are represented as commitments (hashes) and enforced via ZK proofs in later waves
+
 ### Key Functions
 
 **Token System Functions:**
-- `create_token()`: Initialize new token types with custom decimals
-- `mint()`: Mint tokens to specific addresses
-- `transfer_public()`: Public token transfers for transparency
+- `create_token()`: Initializes a new token type with configurable decimals and supply
+- `mint()`: Mints tokens to a specific address for testing and demo purposes
+- `transfer_public()`: Executes public token transfers to support transparent swap settlement
 
 **DEX System Functions:**
-- `create_pool()`: Create new liquidity pools with policy controls
+- `create_pool()`: Creates a new AMM pool with initial reserves and configuration parameters
 - `swap_exact_tokens_for_tokens()`: Execute trades with minimum output guarantees and slippage protection
-
-*Note: Currently in early development with core functionality implemented. Additional functions for advanced features, governance, and institutional controls will be added soon.*
 
 ## Quick Start
 
