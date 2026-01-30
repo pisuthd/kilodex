@@ -180,56 +180,120 @@ struct PoolInfo {
 
 ## Quick Start
 
+This guide helps you run the frontend locally and work with the KiloDEX smart contracts on Aleo Testnet.
+
 ### Prerequisites
-- Node.js 20+ and npm/yarn
-- Aleo account and wallet (for testnet)
+
+Make sure you have the following installed before starting:
+
+- Node.js 20+ and npm or yarn for the frontend
 - Git for version control
+- Aleo wallet (e.g. Leo Wallet or compatible extension) connected to Testnet
+- Rust toolchain (required for building Leo)
+
+You can verify your setup with:
+
+```bash
+node -v
+git --version
+cargo --version
+```
 
 ### Installation
 
-1. **Clone the repository**
+#### 1. Clone the repository
+
+Clone the KiloDEX repository and move into the project directory.
+
 ```bash
 git clone https://github.com/pisuthd/kilodex
 cd kilodex
 ```
 
-2. **Install frontend dependencies**
+#### 2. Install frontend dependencies
+
+The frontend is a Next.js application located in the frontend directory.
+
 ```bash
 cd frontend
 npm install
 ```
 
-3. **Start development server**
+This installs all UI, wallet adapter, and styling dependencies.
+
+#### 3. Start the development server
+
+Run the frontend in development mode.
+
 ```bash
 npm run dev
 ```
 
-4. **Open in browser**
-Navigate to `http://localhost:3000` to access the application.
+The app will connect to Aleo Testnet by default.
+
+#### 4. Open the application
+
+Open your browser and navigate to:
+
+```bash
+http://localhost:3000
+```
+
+From here, you can connect an Aleo wallet, explore the UI, and interact with the testnet deployment.
 
 ### Smart Contract Development
 
-We follow best practices with comprehensive test coverage for all smart contract functionality.
+KiloDEX smart contracts are written in Leo and located at the root of the repository.
+Wave 1 focuses on correctness, clarity, and testability rather than feature completeness.
 
-1. **Install Leo** (if not already installed)
+#### 1. Install Leo
+
+Leo is the programming language and toolchain used for Aleo programs.
+
 ```bash
-# Download the source code and initialize the submodules
+# Clone Leo and its submodules
 git clone --recurse-submodules https://github.com/ProvableHQ/leo
 cd leo
 
-# Install 'leo'
+# Install Leo locally
 cargo install --path .
 ```
 
-2. **Compile the smart contract**
+Verify installation:
+
+```bash
+leo --version
+```
+
+#### 2. Compile the smart contracts
+
+From the root of the KiloDEX repository:
+
 ```bash
 leo build
 ```
 
-3. **Run tests**
+This compiles main.aleo, which includes:
+
+- A mock token system
+- A minimal AMM DEX subsystem
+
+Build artifacts are generated in the outputs/ directory.
+
+#### 3. Run tests
+
+All core functionality is covered by Leo test files.
+
 ```bash
 leo test
 ```
+
+This runs:
+
+- test_token_system.leo for token logic
+- test_dex_system.leo for AMM pool creation and swaps
+
+Tests are designed to serve as a foundation for future waves with more advanced features.
 
 ## Technology Stack
 
@@ -253,7 +317,7 @@ leo test
 - Testnet deployment with demo tokens (WALEO, USDC)
 - Basic token swap functionality with price discovery
 
-### Wave 2 - Policy-Controlled Liquidity (In Progress)
+### Wave 2 - zPass Integration (In Progress)
 - Zero-knowledge credential verification via zPass
 - Liquidity provider controls for trader eligibility criteria
 - Smart contract policy enforcement mechanisms
